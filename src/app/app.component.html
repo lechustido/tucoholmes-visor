@@ -1,15 +1,42 @@
-<div>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Pega el json</mat-label>
-      <textarea [(ngModel)]="rawData" matInput
-        placeholder="Con esto tengo toda la info" name="raw"
-        (focusout)="onChangeValue()"></textarea>
-    </mat-form-field>
-  </form>
+<div style="display: flex;">
+  <div style="flex: 30%;">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Pega el json</mat-label>
+        <textarea [(ngModel)]="rawData" matInput
+          placeholder="Con esto tengo toda la info" name="raw"
+          (focusout)="onChangeValue()"></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  @if (showVideo == true){
+  <div style="flex: 20%;">
+
+    Mensajes de la consola
+    @for (log of savedData.consoleLogs; track log) {
+    <li>
+      {{ log }}
+      <br>
+    </li>
+    } @empty {
+    <li>There are no items.</li>
+    }
+  </div>
+  <div style="flex: 20%;">
+    Mensajes de la consola de errores
+    @for (log of savedData.consoleError; track log) {
+    <li style="color: red;">
+      {{ log }}
+      <br>
+    </li>
+    } @empty {
+    <li>There are no items.</li>
+    }
+  </div>
+  }
 </div>
 
-<div  style="display: flex;">
+<div style="display: flex;">
   @if (showVideo == true){
   <div style="flex: 30%;">
     <ng-container>
@@ -20,17 +47,13 @@
   </div>
   <div style="flex: 70%;">
     @for (apiCall of savedData.requests; track apiCall.url) {
-      <li>
-        {{ apiCall.url }}
-        <br>
-      </li>
-      } @empty {
-      <li>There are no items.</li>
-      }
+    <li>
+      {{ apiCall.url }} <button mat-button (click)="openDialog(apiCall)">Open dialog</button>
+      <br>
+    </li>
+    } @empty {
+    <li>There are no items.</li>
+    }
   </div>
   }
 </div>
-
-
-
-
