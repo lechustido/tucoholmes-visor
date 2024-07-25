@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="pannel">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>LocalStorage</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <button (click)="generateLocalStorage()"
+                    mat-stroked-button>Generar LocalStorage</button>
+            </mat-card-content>
+            <mat-card-footer class="example-card-footer">
+            </mat-card-footer>
+        </mat-card>
+    </div>
+
+    <div class="pannel">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>Errores en consola</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <button (click)="setValueToUndefined()"
+                    mat-stroked-button>Forzar
+                    error acceder escribir en undefined</button>
+                <button (click)="getBasicData()" mat-stroked-button>Obtener
+                    listado
+                    http</button>
+                <button (click)="generate400NetworkError()"
+                    mat-stroked-button>Obtener error 400</button>
+                <button (click)="generate401NetworkError()"
+                    mat-stroked-button>Obtener error 401</button>
+                <button (click)="generate500NetworkError()"
+                    mat-stroked-button>Obtener error 500</button>
+            </mat-card-content>
+            <mat-card-footer class="example-card-footer">
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>
