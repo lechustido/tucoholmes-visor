@@ -37,8 +37,13 @@ export class TestPageComponent {
   //#endregion Llamadas http
 
   //#region Consola
-    public generateConsoleLog():void{
-      console.log('Hola caracola')
+    public generateConsoleLog(id:number):void{
+      if(id === 0){
+        console.log('Hola caracola')
+      }else if (id === 1){
+        console.log('Adiós mejillón')
+      }
+     
     }
 
     public setValueToUndefined(): void {
