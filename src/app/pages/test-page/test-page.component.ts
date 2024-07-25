@@ -18,11 +18,7 @@ export class TestPageComponent {
     private readonly accessService: TestPageAccessService,
     private readonly persister: IesaCommonAngularPersistService) {}
 
-  //#region Errores de consola
-  public setValueToUndefined(): void {
-    this.undefinedObject.name = 'Fallo en nombre ';
-  }
-
+  //#region Llamadas http
   public getBasicData(): void {
     this.accessService.getBasicData();
   }
@@ -38,7 +34,17 @@ export class TestPageComponent {
   public generate500NetworkError(): void {
     this.accessService.generate500NetworkError();
   }
-  //#endregion Errores de consola
+  //#endregion Llamadas http
+
+  //#region Consola
+    public generateConsoleLog():void{
+      console.log('Hola caracola')
+    }
+
+    public setValueToUndefined(): void {
+      this.undefinedObject.name = 'Fallo en nombre ';
+    }
+  //#endregion Consola
  
   //#region Generar LocalStorage
   public generateLocalStorage():void{

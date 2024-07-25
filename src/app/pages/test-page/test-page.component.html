@@ -2,11 +2,17 @@
     <div class="pannel">
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>LocalStorage</mat-card-title>
+                <mat-card-title>Consola y codigo</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <button (click)="generateLocalStorage()"
                     mat-stroked-button>Generar LocalStorage</button>
+                <button (click)="setValueToUndefined()"
+                    mat-stroked-button>Forzar
+                    error acceder escribir en undefined</button>
+                <button (click)="generateConsoleLog()"
+                    mat-stroked-button>Forzar
+                    error acceder escribir en undefined</button>
             </mat-card-content>
             <mat-card-footer class="example-card-footer">
             </mat-card-footer>
@@ -16,12 +22,9 @@
     <div class="pannel">
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Errores en consola</mat-card-title>
+                <mat-card-title>Llamadas http</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <button (click)="setValueToUndefined()"
-                    mat-stroked-button>Forzar
-                    error acceder escribir en undefined</button>
                 <button (click)="getBasicData()" mat-stroked-button>Obtener
                     listado
                     http</button>
