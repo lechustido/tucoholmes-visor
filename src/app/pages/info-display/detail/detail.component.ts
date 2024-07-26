@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ShowRestInfoComponent } from './modal/show-rest-info/show-rest-info.component';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { SavedIssueData } from './model/saved-issue-data.model';
 
 @Component({
   selector: 'app-detail',
@@ -16,11 +17,16 @@ import { MatCardModule } from '@angular/material/card';
   styleUrl: './detail.component.scss',
 })
 export class DetailComponent {
+  @ViewChild('videoVC') videoElementCR!: ElementRef<HTMLVideoElement>;
   public rawData!: any;
-  public savedData!: any;
+  public savedData!: SavedIssueData;
   public videoUrl!: SafeResourceUrl;
   public showVideo: boolean;
   public title = 'tucoholmes-visor';
+  public markers:any = [
+  ]; // Puedes cambiar esto para usar tus datos dinámicos
+ 
+  videoDuration = 0;
 
   constructor(private sanitizer: DomSanitizer, public dialog: MatDialog) {
     this.showVideo = false;
@@ -29,9 +35,19 @@ export class DetailComponent {
   public onChangeValue(): void {
     this.savedData = JSON.parse(this.rawData);
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.savedData.video
+      this.savedData.video.base64
     );
+    console.log(this.savedData)
+    this.videoDuration = this.savedData.video.timer;
     this.showVideo = true;
+    for (let i = 0; i < this.savedData.consoleLogs.length; i++) {
+      let console = this.savedData.consoleLogs[i];
+      this.markers.push({
+        timer: console.timer,
+        label: 'a'
+      })
+      
+    }
   }
 
   public openDialog(restData: any): void {
@@ -48,4 +64,8 @@ export class DetailComponent {
     });
   }
 
+
+  public calculatePosition(timer: number): number {
+    return (timer / this.videoDuration) * 100;
+  }
 }

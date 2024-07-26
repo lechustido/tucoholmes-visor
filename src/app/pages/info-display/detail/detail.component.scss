@@ -13,3 +13,19 @@ mat-card{
         }
     }   
 }
+
+.timeline-container {
+    position: relative;
+    background-color: #f0f0f0;
+    margin-top: 10px;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    bottom: 0;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+  }
