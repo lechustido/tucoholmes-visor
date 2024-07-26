@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,5 +10,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
- 
+  constructor(  private iconRegistry: MatIconRegistry){
+    this.iconRegistry.setDefaultFontSetClass('material-icons-outlined');
+  }
 }
