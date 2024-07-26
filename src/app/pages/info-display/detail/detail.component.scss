@@ -1,0 +1,15 @@
+.video-data{
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+mat-card{
+    mat-card-content {
+        display: grid;
+        li{
+            margin-top:5px;
+        }
+    }   
+}

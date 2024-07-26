@@ -5,12 +5,14 @@ import { ShowRestInfoComponent } from './modal/show-rest-info/show-rest-info.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   standalone: true,
-  imports: [MatFormFieldModule, MatFormFieldModule, FormsModule, CommonModule],
+  imports: [MatFormFieldModule, MatFormFieldModule, FormsModule,MatInputModule, CommonModule, MatCardModule],
   styleUrl: './detail.component.scss',
 })
 export class DetailComponent {
@@ -45,4 +47,5 @@ export class DetailComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
+
 }
