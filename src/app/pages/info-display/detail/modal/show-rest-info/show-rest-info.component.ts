@@ -22,7 +22,7 @@ export class ShowRestInfoComponent {
     private _sanitizer: DomSanitizer,
     @Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(data);
-    this.httpData = data.data;
+   /* this.httpData = data.data;
 
     if(data.data.response.startsWith('[{')){
       this.responseContent = 'json';
@@ -31,6 +31,6 @@ export class ShowRestInfoComponent {
       this.responseContent = 'img';
       this.imgUrl = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
                  + this.httpData.response);
-    }
+    }*/
   }
 }

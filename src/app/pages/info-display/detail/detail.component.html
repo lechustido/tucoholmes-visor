@@ -63,7 +63,7 @@
           <mat-card-content>
             @for (log of savedData.consoleError; track log) {
             @if(sincFilterActive === false || log.timer <= currentTimeVideo){
-            <li style="color: red;">
+            <li style="color: red;" (click)="seekTo(log.timer)">
               {{ log.error }}
               <br>
             </li>
@@ -88,9 +88,9 @@
             @for (apiCall of savedData.requests; track apiCall.url) {
             @if(sincFilterActive === false || apiCall.timer <=
             currentTimeVideo){
-            <li>
+            <li (click)="seekTo(apiCall.timer)">
               {{ apiCall.url }} <button mat-button
-                (click)="openDialog(apiCall)">Open
+                (click)="openHttpDataDialog(apiCall)">Open
                 dialog</button>
               <br>
             </li>
@@ -113,7 +113,7 @@
             @for (log of savedData.consoleLogs; track log) {
               @if(sincFilterActive === false || log.timer <=
               currentTimeVideo){
-                <li>
+                <li (click)="seekTo(log.timer)">
                   {{ log.error }}
                   <br>
                 </li>
@@ -144,3 +144,7 @@
     }
   </div>
 </div>
+
+<lib-iesa-tc-common-angular-modal-window #modalWindowInput
+[windowData]="httpModalDataObject">
+</lib-iesa-tc-common-angular-modal-window>

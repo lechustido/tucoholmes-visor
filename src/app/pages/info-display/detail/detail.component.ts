@@ -8,7 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { SavedIssueData } from './model/saved-issue-data.model';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  IesaTcCommonAngularModalWindowComponent,
+  IesaTcCommonAngularModalWindowModule,
+  ModalWindowsDataModel,
+} from 'iesa-tc-common-angular-modal-window';
+import { DetailConstructorService } from './detail.constructor.service';
 
 @Component({
   selector: 'app-detail',
@@ -21,12 +27,17 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatInputModule,
     CommonModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    IesaTcCommonAngularModalWindowModule,
   ],
+  providers: [DetailConstructorService],
   styleUrl: './detail.component.scss',
 })
 export class DetailComponent {
   @ViewChild('videoVC') videoElementCR!: ElementRef<HTMLVideoElement>;
+  @ViewChild('modalWindowInput')
+  public htppModalCR!: IesaTcCommonAngularModalWindowComponent;
+  public httpModalDataObject!: ModalWindowsDataModel;
   public rawData!: any;
   public savedData!: SavedIssueData;
   public videoUrl!: SafeResourceUrl;
@@ -53,39 +64,22 @@ export class DetailComponent {
 
   videoDuration = 0;
 
-  constructor(private sanitizer: DomSanitizer, public dialog: MatDialog) {
+  constructor(
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog,
+    public constructorService: DetailConstructorService
+  ) {
     this.showVideo = false;
     this.currentTimeVideo = 0;
     this.sincFilterActive = false;
+    this.initHttpDataModal();
   }
 
-  public onChangeValue(): void {
-    this.savedData = JSON.parse(this.rawData);
-    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      this.savedData.video.base64
-    );
-    this.videoDuration = this.savedData.video.timer;
-    this.showVideo = true;
-    this.generateMarkersData();
+  //#region Inicialización de librerías comunes
+  public initHttpDataModal(): void {
+    this.httpModalDataObject = this.constructorService.initHttpDataModal();
   }
-
-  public openDialog(restData: any): void {
-    const dialogRef = this.dialog.open(ShowRestInfoComponent, {
-      width: '50%',
-      height: '60%',
-      data: {
-        data: restData,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  public calculatePosition(timer: number): number {
-    return (timer / this.videoDuration) * 100;
-  }
+  //#endregion Inicialización de librerías comunes
 
   //#region Funciones comunes
   public generateMarkersData(): void {
@@ -120,6 +114,30 @@ export class DetailComponent {
   public onTimeUpdate(): void {
     this.currentTimeVideo = this.videoElementCR.nativeElement.currentTime;
     // Aquí puedes realizar cualquier acción adicional con el tiempo actual
+  }
+
+  public onChangeValue(): void {
+    this.savedData = JSON.parse(this.rawData);
+    this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      this.savedData.video.base64
+    );
+    this.videoDuration = this.savedData.video.timer;
+    this.showVideo = true;
+    this.generateMarkersData();
+  }
+
+  public calculatePosition(timer: number): number {
+    return (timer / this.videoDuration) * 100;
+  }
+
+  public openHttpDataDialog(restData: any): void {
+    if (this.httpModalDataObject !== undefined) {
+      if (this.httpModalDataObject.configurationPredefinedStyles) {
+        this.httpModalDataObject.configurationPredefinedStyles.modalData =
+          restData;
+      }
+      this.htppModalCR.openIesaModal();
+    }
   }
   //#endregion Funciones comunes
 }
