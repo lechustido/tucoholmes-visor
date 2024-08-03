@@ -15,6 +15,7 @@ import {
   ModalWindowsDataModel,
 } from 'iesa-tc-common-angular-modal-window';
 import { DetailConstructorService } from './detail.constructor.service';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @Component({
   selector: 'app-detail',
@@ -29,6 +30,7 @@ import { DetailConstructorService } from './detail.constructor.service';
     MatCardModule,
     MatSlideToggleModule,
     IesaTcCommonAngularModalWindowModule,
+    NgxJsonViewerModule
   ],
   providers: [DetailConstructorService],
   styleUrl: './detail.component.scss',
@@ -118,6 +120,7 @@ export class DetailComponent {
 
   public onChangeValue(): void {
     this.savedData = JSON.parse(this.rawData);
+    console.log(this.savedData)
     this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
       this.savedData.video.base64
     );

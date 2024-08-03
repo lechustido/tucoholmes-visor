@@ -42,6 +42,7 @@
     "iesa-tc-common-angular-url-assets-pipe": "^0.0.14",
     "moment": "^2.30.1",
     "ngx-device-detector": "^8.0.0",
+    "ngx-json-viewer": "^3.2.1",
     "ngx-mask": "^17.1.1",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",

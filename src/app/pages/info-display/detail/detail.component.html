@@ -133,7 +133,7 @@
             <mat-card-title>LocalStorage</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            {{savedData.localStorage.toString()}}
+            <ngx-json-viewer [json]="savedData.localStorage"></ngx-json-viewer>
           </mat-card-content>
           <mat-card-footer>
           </mat-card-footer>
